@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import ChemFormula
+from . import utils
+
 
 def trainer(request):
 	chemformulas = ChemFormula.objects.all().values()
@@ -14,3 +16,13 @@ def trainer(request):
 def main(request):
 	template = loader.get_template('main.html')
 	return HttpResponse(template.render())
+
+def add_formula(request):
+	return render(request, 'add_formula.html')
+
+
+def add_formula_result(request):
+	name = request.POST.get("name")
+	formula = request.POST.get("formula")
+	utils.write_formula(name, formula)
+	return render(request, "add_formula_result.html")

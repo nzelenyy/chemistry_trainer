@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+
+{% block title %}
+Страница для добавления формул
+{% endblock %}
+
+{% block content %}
+<p><a href="/">На главную</a></p>
+    <form method="post" action="add_formula_result/">{% csrf_token %}
+        <p>Название:<br> <input name="name" /></p>
+        <p>Формлуа:<br> <input name="formula" /></p>
+        <input type="submit" value="Добавить" />
+    </form>
+{% endblock %}
