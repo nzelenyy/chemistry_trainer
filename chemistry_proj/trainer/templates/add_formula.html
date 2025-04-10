@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+
+{% block title %}
+Страница для добавления формул
+{% endblock %}
+
+
+{% block content %}
+<div class="container-sm px-5 py-5" id="term-form">
+    <a href="/" class="btn btn-outline-primary mb-4">
+        <i class="bi bi-arrow-left"></i> На главную
+    </a>
+    
+    <form method="post" action="add_formula_result/">{% csrf_token %}
+        <div class="row px-5 py-2">
+            <h3>Новая формула</h3>
+        </div>
+        <div class="row px-5 py-2">
+            <div class="col-md-6">
+                <label for="name">Название:</label>
+                <input type="text" class="form-control input-lg" name="name" id="name" placeholder="Вода" value required>
+            </div>
+            <div class="col-md-6">
+                <label for="formula">Химическая формула:</label>
+                <input type="text" class="form-control input-lg" name="formula" id="formula" placeholder="H20" value required>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
