@@ -1,0 +1,18 @@
+{% extends "master.html" %}
+
+{% block title %}
+  Список формул
+{% endblock %}
+
+
+{% block content %}
+  <p><a href="/">На главную</a></p>
+
+  <h1>Список сохраненных формул</h1>
+
+  <ul>
+    {% for x in chemformulas %}
+      <li>{{ x.name }} {{ x.formula }}</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
