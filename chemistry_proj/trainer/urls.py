@@ -11,4 +11,5 @@ urlpatterns = [
     path("trainer/add_substance", views.add_substance, name='add_substance'),
     path("trainer/add_substance_result/", views.add_substance_result, name='add_substance_result'),
     path("trainer/substances_gallery/", views.substances_gallery, name='substances_gallery'),
+    path('trainer/substances_gallery/delete_substance', views.delete_substance, name='delete_substance'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

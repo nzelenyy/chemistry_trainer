@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import ChemFormula
@@ -39,3 +39,12 @@ def add_substance_result(request):
 def substances_gallery(request):
     images = SubstanceImg.objects.all()
     return render(request, 'substances_gallery.html', {'images': images})
+
+def delete_substance(request):
+    if request.method == 'POST':
+        image_id = request.POST.get('image_id')
+        try:
+        	utils.remove_substance(image_id)
+        except SubstanceImg.DoesNotExist:
+            pass
+    return redirect('substances_gallery')  
