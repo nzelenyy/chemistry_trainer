@@ -1,0 +1,19 @@
+{% extends "master.html" %}
+
+{% block content %}
+<div class="container-sm px-5 py-5" id="term-form-result">
+    <a href="/" class="btn btn-outline-primary mb-4">
+        <i class="bi bi-arrow-left"></i> На главную
+    </a>
+    <h2 class="pb-2 border-bottom">Результат запроса</h2>
+    <p>
+        Новое вещество успешно сохранено
+    </p>
+
+    <h2 class="pb-2 border-bottom">Что можно сделать?</h2>
+    <ul>
+        <li>заполнить <a href="/trainer/add_substance">форму</a> ещё раз,</li>
+        <li>вернуться на <a href="/">главную</a></li>
+    </ul>
+</div>
+{% endblock %}

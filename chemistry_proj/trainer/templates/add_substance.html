@@ -1,0 +1,33 @@
+{% extends "master.html" %}
+
+{% block title %}
+Страница для добавления фотографий веществ
+{% endblock %}
+
+
+{% block content %}
+<div class="container-sm px-5 py-5" id="term-form">
+    <a href="/" class="btn btn-outline-primary mb-4">
+        <i class="bi bi-arrow-left"></i> На главную
+    </a>
+    
+    <form method="post" action="add_substance_result/" enctype="multipart/form-data">{% csrf_token %}
+        <div class="row px-5 py-2">
+            <h3>Новое вещество</h3>
+        </div>
+        <div class="row px-5 py-2">
+            <div class="col-md-6">
+                <label for="name" class="form-label">Название:</label>
+                <input type="text" class="form-control input-lg" name="name" id="name" placeholder="Вещество" value required>
+            </div>
+            <div class="col-md-6">
+                <label for="substance" class="form-label">Изображение:</label>
+                <input class="form-control" type="file" name="substance" value required>
+            </div>
+        </div>
+        <div class="row px-5 py-2">
+            <button type="submit" class="btn btn-primary">Отправить</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

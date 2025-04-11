@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import ChemFormula
+from .models import SubstanceImg
 from . import utils
 
 
@@ -13,16 +14,6 @@ def trainer(request):
 	}
 	return HttpResponse(template.render(context, request))
 
-# def trainer(request):
-# 	names = ChemFormula.objects.values_list('name', flat=True)
-# 	formulas = ChemFormula.objects.values_list('formula', flat=True)
-# 	template = loader.get_template('formulas_list.html')
-# 	context = {
-# 		'names': names,
-# 		'formulas': utils.chem_format(formulas),
-# 	}
-# 	return HttpResponse(template.render(context, request))
-
 def main(request):
 	template = loader.get_template('main.html')
 	return HttpResponse(template.render())
@@ -33,5 +24,18 @@ def add_formula(request):
 def add_formula_result(request):
 	name = request.POST.get("name")
 	formula = request.POST.get("formula")
-	utils.write_formula(name, utils.chem_format(formula))
+	utils.write_formula(name, formula)
 	return render(request, "add_formula_result.html")
+
+def add_substance(request):
+	return render(request, 'add_substance.html')
+
+def add_substance_result(request):
+	name = request.POST.get("name")
+	image = request.FILES.get("substance")
+	utils.write_substance(name, image)
+	return render(request, "add_substance_result.html")
+
+def substances_gallery(request):
+    images = SubstanceImg.objects.all()
+    return render(request, 'substances_gallery.html', {'images': images})
