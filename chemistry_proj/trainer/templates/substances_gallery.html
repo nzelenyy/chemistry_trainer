@@ -16,7 +16,14 @@
         {% for image in images %}
         <div class="col">
             <div class="card h-100 shadow-sm">
-                <img src="{{ image.image.url }}" class="card-img-top img-fluid p-2" alt="{{ image.name }}" style="height: 200px; object-fit: contain;">
+                <img src="{{ image.image.url }}" 
+                     class="card-img-top img-fluid p-2 gallery-image" 
+                     alt="{{ image.name }}" 
+                     style="height: 200px; object-fit: contain; cursor: pointer;"
+                     data-bs-toggle="modal" 
+                     data-bs-target="#imageModal"
+                     data-bs-image="{{ image.image.url }}"
+                     data-bs-title="{{ image.name }}">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{ image.name }}</h5>
                 </div>
@@ -24,5 +31,40 @@
         </div>
         {% endfor %}
     </div>
+
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="modalImage" src="" class="img-fluid" style="max-height: 70vh;">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var imageModal = document.getElementById('imageModal');
+    imageModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var imageUrl = button.getAttribute('data-bs-image');
+        var imageTitle = button.getAttribute('data-bs-title');
+        
+        document.getElementById('modalImage').src = imageUrl;
+        document.getElementById('modalTitle').textContent = imageTitle;
+    });
+});
+</script>
+
+<style>
+.gallery-image:hover {
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+}
+</style>
 {% endblock %}
