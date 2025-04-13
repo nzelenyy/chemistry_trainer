@@ -23,7 +23,8 @@
                      data-bs-toggle="modal" 
                      data-bs-target="#imageModal"
                      data-bs-image="{{ image.image.url }}"
-                     data-bs-title="{{ image.name }}">
+                     data-bs-title="{{ image.name }}"
+                     data-bs-id="{{ image.id }}">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{ image.name }}</h5>
                 </div>
@@ -41,6 +42,11 @@
                 </div>
                 <div class="modal-body text-center">
                     <img id="modalImage" src="" class="img-fluid" style="max-height: 70vh;">
+                    <form id="deleteForm" method="post" action="delete_substance">
+                        {% csrf_token %}
+                        <input type="hidden" name="image_id" id="imageIdInput">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Вы уверены, что хотите удалить это изображение?')">Удалить</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -54,9 +60,11 @@ document.addEventListener('DOMContentLoaded', function() {
         var button = event.relatedTarget;
         var imageUrl = button.getAttribute('data-bs-image');
         var imageTitle = button.getAttribute('data-bs-title');
-        
+        var imageId = button.getAttribute('data-bs-id');
+
         document.getElementById('modalImage').src = imageUrl;
         document.getElementById('modalTitle').textContent = imageTitle;
+        document.getElementById('imageIdInput').value = imageId;
     });
 });
 </script>

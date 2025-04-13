@@ -28,7 +28,14 @@
                 {% for x in chemformulas %}
                 <tr>
                   <td>{{ x.name }}</td>
-                  <td>{{ x.formula|safe }}</td>
+                  <td class="d-flex justify-content-between align-items-center">
+                    <span class="formula">{{ x.formula|safe }}</span>
+                    <form action="delete_formula" method="post" style="display: none;" class="delete-form">
+                      {% csrf_token %}
+                      <input type="hidden" name="formula_id" value="{{ x.id }}">
+                      <button type="submit" class="btn btn-danger btn-xxs" onclick="return confirm('Вы уверены, что хотите удалить эту формулу?')">Удалить</button>
+                    </form>
+                  </td>
                 </tr>
                 {% endfor %}
               </tbody>
@@ -37,4 +44,15 @@
         </div>
       </div>
   </div>
+
+  <style>
+    tr:hover .delete-form {
+      display: block !important;
+    }
+
+    .btn-xxs {
+      padding: 0.05rem 0.1rem;
+      font-size: 0.6rem;
+    }
+  </style>
 {% endblock %}
