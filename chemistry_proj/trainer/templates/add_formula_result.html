@@ -1,11 +1,18 @@
 {% extends "master.html" %}
 
+{% block page-title %}
+{% if success %}
+Формула добавлена
+{% else %}
+Ошибка добавления
+{% endif %}
+{% endblock %}
+
 {% block content %}
 <div class="container-sm px-5 py-5" id="term-form-result">
-    <h2 class="pb-2 border-bottom">Результат запроса</h2>
-    <p>
-        Новая формула добавлена в список
-    </p>
+    <h2 class="pb-2 border-bottom">{% if success %}Успех{% else %}Ошибка{% endif %}</h2>
+    
+    <p>{{ comment }}</p>
 
     <h2 class="pb-2 border-bottom">Что можно сделать?</h2>
     <ul>

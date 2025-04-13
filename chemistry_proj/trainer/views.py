@@ -22,13 +22,31 @@ def add_formula(request):
 	return render(request, 'add_formula.html')
 
 def add_formula_result(request):
-	name = request.POST.get("name")
-	formula = request.POST.get("formula")
-	utils.write_formula(name, formula)
-	return render(request, "add_formula_result.html")
+	if request.method == "POST":
+		name = request.POST.get("name", "").strip()
+		formula = request.POST.get("formula", "").strip()
+		if not name:
+			context = {
+				"success": False,
+				"comment": "Название формулы не может быть пустым"
+			}
+		elif not formula:
+			context = {
+				"success": False,
+				"comment": "Формула не должна быть пустой"
+			}
+		else:
+			utils.write_formula(name, formula)
+			context = {
+				"success": True,
+				"comment": "Формула успешно добавлена"
+			}
+		return render(request, "add_formula_result.html", context)
+	else:
+		return render(request, "add_substance.html")
 
 def add_substance(request):
-	return render(request, 'add_substance.html')
+	return render(request, 'add_formula.html')
 
 def add_substance_result(request):
     if request.method == "POST":
