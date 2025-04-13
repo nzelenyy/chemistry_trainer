@@ -31,10 +31,42 @@ def add_substance(request):
 	return render(request, 'add_substance.html')
 
 def add_substance_result(request):
-	name = request.POST.get("name")
-	image = request.FILES.get("substance")
-	utils.write_substance(name, image)
-	return render(request, "add_substance_result.html")
+    if request.method == "POST":
+        name = request.POST.get("name", "").strip()
+        image = request.FILES.get("substance")
+        
+        if not name:
+            context = {
+                "success": False,
+                "comment": "Название вещества не может быть пустым"
+            }
+        elif not image:
+            context = {
+                "success": False,
+                "comment": "Не выбрано изображение вещества"
+            }
+        else:
+            allowed_extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp'}
+            if not any(image.name.lower().endswith(ext) for ext in allowed_extensions):
+                context = {
+                    "success": False,
+                    "comment": "Недопустимый формат изображения. Допустимы: JPG, PNG, GIF, BMP"
+                }
+            elif image.size > 15 * 1024 * 1024:
+                context = {
+                    "success": False,
+                    "comment": "Размер изображения не должен превышать 15 MB"
+                }
+            else:
+                utils.write_substance(name, image)
+                context = {
+                    "success": True,
+                    "comment": "Вещество успешно добавлено"
+                }
+
+        return render(request, "add_substance_result.html", context)
+    else:
+        return render(request, "add_substance.html")
 
 def substances_gallery(request):
     images = SubstanceImg.objects.all()
