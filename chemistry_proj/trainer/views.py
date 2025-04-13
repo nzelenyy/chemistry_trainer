@@ -46,7 +46,7 @@ def add_formula_result(request):
 		return render(request, "add_substance.html")
 
 def add_substance(request):
-	return render(request, 'add_formula.html')
+	return render(request, 'add_substance.html')
 
 def add_substance_result(request):
     if request.method == "POST":
