@@ -5,23 +5,66 @@
 {% endblock %}
 
 {% block content %}
-  <div class="container-fluid p-5 bg-primary text-white text-center">
-  <h1>Тренажер по химии</h1>
-  <p>Скоро здесь будет удобное приложение!</p> 
-
+  <div class="jumbotron jumbotron-fluid bg-gradient bg-primary text-white text-center mb-5 py-5" style="background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 100%);">
+    <div class="container py-4">
+      <h1 class="display-4 fw-bold">Тренажер по химии</h1>
+      <p class="lead fs-4">Это страница проекта по изучению химии</p>
+    </div>
   </div>
-  <div class="container mt-5">
-    <div class="row">
-      <div class="col-sm-6">
-        <h3>Формулы</h3>
-        <p>Список всех сохраненных <a href="trainer/">формул</a>.</p> 
-        <p><a href="trainer/add_formula">Форма</a>, чтобы загрузить новые</p> 
+
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-lg hover-shadow">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="text-center mb-4">
+              <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <i class="bi bi-calculator fs-1 text-primary"></i>
+              </div>
+            </div>
+            <h3 class="card-title text-center mb-3">Формулы</h3>
+            <p class="card-text flex-grow-1">Здесь можно сохранять формулы химических веществ или реакций, а потом просматривать их в удобной таблице.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-center mt-auto">
+              <a href="trainer/" class="btn btn-primary px-4 py-2 rounded-pill">Список формул</a>
+              <a href="trainer/add_formula" class="btn btn-outline-primary px-4 py-2 rounded-pill">Добавить формулу</a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-sm-6">
-        <h3>Вещества</h3>
-        <p>Галерея изображений химических <a href="trainer/substances_gallery">веществ</a>.</p> 
-        </p><a href="trainer/add_substance">Форма</a>, чтобы загрузить новые.</p>
+      
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow-lg hover-shadow">
+          <div class="card-body p-4 d-flex flex-column">
+            <div class="text-center mb-4">
+              <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                <i class="bi bi-images fs-1 text-primary"></i>
+              </div>
+            </div>
+            <h3 class="card-title text-center mb-3">Вещества</h3>
+            <p class="card-text flex-grow-1">Здесь можно загружать фотографии химических веществ, а потом просматривать их в галерее.</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-center mt-auto">
+              <a href="trainer/substances_gallery" class="btn btn-primary px-4 py-2 rounded-pill">Галерея веществ</a>
+              <a href="trainer/add_substance" class="btn btn-outline-primary px-4 py-2 rounded-pill">Добавить вещество</a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <style>
+    .hover-shadow {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-shadow:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
+    }
+    .icon-wrapper {
+      transition: transform 0.3s ease;
+    }
+    .card:hover .icon-wrapper {
+      transform: scale(1.1);
+    }
+  </style>
 {% endblock %}
