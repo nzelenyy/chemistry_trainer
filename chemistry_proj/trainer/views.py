@@ -47,4 +47,40 @@ def delete_substance(request):
         	utils.remove_substance(image_id)
         except SubstanceImg.DoesNotExist:
             pass
-    return redirect('substances_gallery')  
+    return redirect('substances_gallery')
+
+def delete_formula(request):
+	if request.method == 'POST':
+		formula_id = request.POST.get('formula_id')
+		if formula_id:
+			utils.remove_formula(formula_id)
+	return redirect('trainer')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -14,6 +14,9 @@ def write_substance(name, substance):
     new_substance.save()
 
 def remove_substance(image_id):
-    print(image_id)
     image = SubstanceImg.objects.get(id=int(image_id))
     image.delete()
+
+def remove_formula(formula_id):
+    formula = ChemFormula.objects.get(id=int(formula_id))
+    formula.delete()
